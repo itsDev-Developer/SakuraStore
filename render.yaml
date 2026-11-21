@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: sakura-store
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - {key: API_ID, sync: false}
+      - {key: API_HASH, sync: false}
+      - {key: BOT_TOKEN, sync: false}
+      - {key: CHANNEL, sync: false}
+      - {key: MONGO_URI, sync: false}      # MongoDB Atlas connection string
+      - {key: ADMIN_IDS, sync: false}
+      - {key: MONGO_DB, value: sakura}
+      - {key: TRANSLATE_TO, value: en}
+      - {key: WEBAPP_URL, value: auto}     # Render's RENDER_EXTERNAL_URL is used

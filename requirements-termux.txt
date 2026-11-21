@@ -1,0 +1,6 @@
+# Pillow comes from `pkg install python-pillow` (see termux/setup.sh)
+telethon>=1.36,<2
+aiohttp>=3.9
+motor>=3.4,<4
+python-dotenv>=1.0
+deep-translator>=1.11

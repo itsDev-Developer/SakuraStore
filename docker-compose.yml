@@ -1,0 +1,24 @@
+services:
+  app:
+    build: .
+    env_file: .env
+    environment:
+      MONGO_URI: mongodb://mongo:27017   # overrides .env: use the bundled Mongo
+      PORT: "8000"
+    depends_on: [mongo]
+    restart: unless-stopped
+  mongo:
+    image: mongo:7
+    volumes: ["mongo:/data/db"]
+    restart: unless-stopped
+  caddy:                                 # automatic HTTPS (Mini Apps require it)
+    image: caddy:2
+    ports: ["80:80", "443:443"]
+    environment:
+      DOMAIN: ${DOMAIN}
+    volumes: ["./Caddyfile:/etc/caddy/Caddyfile", "caddy:/data"]
+    depends_on: [app]
+    restart: unless-stopped
+volumes:
+  mongo: {}
+  caddy: {}
